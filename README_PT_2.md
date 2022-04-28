@@ -56,7 +56,7 @@ Repeat these steps to fetch your books as well!
 
 With Apollo we can interact with our database - let's see if we can add some authors and books. To do this we will use the [`useMutation`](https://www.apollographql.com/docs/tutorial/mutations/#apply-the-usemutation-hook) hook from Apollo.
 
-Create a file called `AddAuthorsMutation.js` in your `graphql` folder. Your mutation should accept a parameter called `name` which should have the type `String!`.
+Create a file called `AddAuthorMutation.js` in your `graphql` folder. Your mutation should accept a parameter called `name` which should have the type `String!`.
 
 > **remember** that you can test running the query on `localhost:4000/graphql`
 
@@ -65,6 +65,8 @@ The mutation returns two variables, `success` which is either true or false and 
 In `App.js` replace the inline functions passed to the dialog components with a function that runs the mutation with the data the user inputs in the dialog!
 
 Write a function that accepts an authorName as a parameter and then runs the `addAuthors` callback from the useMutation hook.
+
+> [Example on how to do this](https://www.apollographql.com/docs/react/data/mutations/#example)
 
 ```js
 const handleAddAuthor = (authorName) => {
@@ -75,7 +77,7 @@ const handleAddAuthor = (authorName) => {
 Now repeat the process but for adding books.
 
 ```js
-const handleAddBook = (authorId, bookTitle) => {
+const handleAddBook = ({ authorId, bookTitle }) => {
   // code goes here
 };
 ```
@@ -88,7 +90,7 @@ Good job so far! Now let's add the ability to remove books and authors.
 
 in `App.js` replace the inline functions passed to the `Tabs` component with a function that runs the useMutation callback.
 
-If you need a refresher, head over to `typeDefs.graphql` to see how the mutation is defined.
+If you need a refresher, head over to `typeDefs.graphql` to see how the mutations are defined.
 
 You got this.
 
