@@ -6,6 +6,8 @@ In a nutshell, [GraphQL](https://graphql.org/) (Graph Query Language) is a synta
 
 - :books: Documentation
   - [Apollo](https://www.apollographql.com/docs/)
+  - [Apollo Server](https://www.apollographql.com/docs/apollo-server)
+  - [Apollo Client](https://www.apollographql.com/docs/react)
   - [MongoDB](https://www.mongodb.com/docs/)
 - :link: Links
   - [Github GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer)
@@ -37,6 +39,8 @@ If you have experience from any typed language the concept of types might be fam
 <br/>
 
 ## 2. Let's start small.
+
+Have a look [here](https://www.apollographql.com/docs/apollo-server/data/resolvers/) for some documentation for what you're about to do.
 
 Inside `index.js` in the root folder create two variables called `resolvers` and `typeDefs`. The `typeDefs` variable defines types and queries available to your API. `resolvers` are the callbacks for your queries. All queries defined in `typeDefs` needs to be defined in `resolvers`.
 
@@ -120,7 +124,14 @@ Now go to the `index.js` file inside the root folder and replace `typeDefs` and 
 
 > Don't forget to import `schema` from "./graphql/schema.js"
 
-You also want to enable the `Playground` plugin. Add a plugin key to the config in `ApolloServer`, it is an array, pass `Playground()`. Magic!
+You also want to enable the `Playground` plugin, magic!
+
+```js
+const server = new ApolloServer({
+  ...
+  plugins: [Playground()]
+})
+```
 
 When you're done, try to restart the server. If everything goes well, try to query both the books and authors at the same time. You can ask for the title of the books and the name of the authors.
 
@@ -136,7 +147,7 @@ Now try to query for a single author and book in the playground. Did it work?
 
 When we want the data from the server we execute a query. But when we want to update the data on the server we use a [mutation](https://www.apollographql.com/docs/tutorial/mutation-resolvers/).
 
-First thing is to define a type called `Mutation` inside `typeDefs.graphql`. It will look a lot like our `Query` type. Here we need to specify what arguments our mutation want. For example to add an author, we need a name of type `String!`.
+First thing is to define a type called `Mutation` inside `typeDefs.graphql`. It will look a lot like our `Query` type. Here we need to specify what arguments our mutation want. To add an author, the `addAuthor` mutation should accept an argument called `name` of type `String!`.
 
 We also need to set a response type. In another situation you could do something else, but we will define a reponse type called `MutationReponse` which should look like this.
 

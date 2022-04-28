@@ -18,7 +18,7 @@ In a nutshell, [GraphQL](https://graphql.org/) (Graph Query Language) is a synta
 
 Firstly, let's start our application. From the root, cd in to the `/client` folder and run `npm run start`.
 
-Now we need to add our queries to our client-side code. Create a folder in the root of the `/client` folder called `graphql`. Inside create a new file `GetAuthorsQuery.js` it should look something like this:
+Now we need to add our queries to our client-side code. Create a folder in the `/client/src` folder called `graphql`. Inside create a new file `GetAuthorsQuery.js` it should look something like this:
 
 ```js
 import { gql } from "@apollo/client";
