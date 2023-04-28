@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { AddAuthorDialog, AddBookDialog, Card, Main, Tabs } from "./components";
+import { useQuery } from "@apollo/client";
+import { GetAuthorsQuery } from "./graphql/GetAuthorsQuery";
+import { AddAuthorMutation } from "./graphql/AddAuthorMutation";
+import { useMutation } from "@apollo/client";
 
 // Replace with real data
 import { mockedAuthors, mockedBooks } from "./temporaryDatabase";
@@ -16,6 +20,20 @@ function App() {
   /**
    * Code goes here
    */
+  const [addAuthor, { data: addAuthorData }] = useMutation(AddAuthorMutation);
+
+  const handleAddAuthor = (authorName) => {
+    addAuthor({
+      variables: {
+        name: authorName,
+        books: [],
+      },
+    });
+  };
+
+  const { data, error, loading } = useQuery(GetAuthorsQuery);
+
+  console.log(data, error, loading);
 
   return (
     <>
@@ -46,9 +64,10 @@ function App() {
       ) : null}
       {currentTab === "authors" ? (
         <AddAuthorDialog
-          onSubmit={() => console.log("Add author!")} //Replace with a function
+          onSubmit={() => handleAddAuthor()} //Replace with a function
           toggleModal={toggleModal}
           modalOpen={modalOpen}
+          handleAddAuthor={handleAddAuthor}
         />
       ) : null}
     </>

@@ -1,0 +1,30 @@
+type Book {
+  _id: ID!
+  title: String!
+  author: Author!
+}
+
+type Author {
+  _id: ID!
+  name: String!
+  books: [Book]
+}
+
+type Query {
+  books: [Book]
+  book(_id: ID!): Book
+  authors: [Author]
+  author(_id: ID!): Author
+}
+
+type MutationResponse {
+  success: Boolean!
+  message: String
+}
+
+type Mutation {
+  addAuthor(name: String!, books: [ID]): MutationResponse!
+  addBook(title: String!, author: ID): MutationResponse!
+  removeBook(_id: ID!): MutationResponse!
+  removeAuthor(_id: ID!): MutationResponse!
+}
